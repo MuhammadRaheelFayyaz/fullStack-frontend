@@ -22,16 +22,17 @@ import {
 import { mapStateToProps, mapDispatchToProps } from "../actions/user.action";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-const SignUp = props => {
+const Signin = props => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const submitHandler = async () => {
     let user = { name, password };
     try {
-      await props.register(user);
+      await props.signIn(user);
       let token = await localStorage.getItem("token");
-      // if (!token) throw "Invalid Credential";
-      // alert("Success");
+      if (!token) throw "Invalid Credential";
+      console.log("token :", token);
+      alert("Success");
     } catch (error) {
       alert(error);
     }
@@ -47,7 +48,7 @@ const SignUp = props => {
           style={{ marginTop: 50 }}
         >
           <Card>
-            <CardHeader tag="h3">Join Us</CardHeader>
+            <CardHeader tag="h3">Sign In</CardHeader>
             <CardBody>
               <Form>
                 <FormGroup>
@@ -74,14 +75,17 @@ const SignUp = props => {
                 </FormGroup>
                 <div style={{ textAlign: "right" }}>
                   <Button color="success" type="button" onClick={submitHandler}>
-                    Register
+                    Sign In
                   </Button>
                 </div>
               </Form>
             </CardBody>
             <CardFooter>
               <Button color="link">
-                <Link to="/signin">Already have an account Signin</Link>
+                <Link to="/register">
+                  {" "}
+                  If dont have account then please join us
+                </Link>
               </Button>
             </CardFooter>
           </Card>
@@ -91,4 +95,4 @@ const SignUp = props => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(Signin);
