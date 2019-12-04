@@ -23,11 +23,10 @@ import { mapStateToProps, mapDispatchToProps } from "../actions/user.action";
 import { connect } from "react-redux";
 
 const SignUp = props => {
-  console.log("props :", props);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const submitHandler = () => {
-    let user = { name };
+    let user = { name, password };
     props.register(user);
   };
   return (
