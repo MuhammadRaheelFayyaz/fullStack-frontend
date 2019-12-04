@@ -19,10 +19,17 @@ import {
   FormText,
   Button
 } from "reactstrap";
+import { mapStateToProps, mapDispatchToProps } from "../actions/user.action";
+import { connect } from "react-redux";
 
-const SignUp = () => {
+const SignUp = props => {
+  console.log("props :", props);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const submitHandler = () => {
+    let user = { name };
+    props.register(user);
+  };
   return (
     <Container>
       <Row>
@@ -60,7 +67,7 @@ const SignUp = () => {
                   />
                 </FormGroup>
                 <div style={{ textAlign: "right" }}>
-                  <Button color="success" type="button">
+                  <Button color="success" type="button" onClick={submitHandler}>
                     Register
                   </Button>
                 </div>
@@ -76,4 +83,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
