@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Row,
@@ -19,7 +19,10 @@ import {
   FormText,
   Button
 } from "reactstrap";
+
 const SignUp = () => {
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <Container>
       <Row>
@@ -36,7 +39,14 @@ const SignUp = () => {
               <Form>
                 <FormGroup>
                   <Label for="name">Username*</Label>
-                  <Input type="text" name="name" id="name" placeholder="Jhon" />
+                  <Input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="Jhon"
+                    onChange={e => setName(e.target.value)}
+                    value={name}
+                  />
                 </FormGroup>
                 <FormGroup>
                   <Label for="password">Password*</Label>
@@ -45,6 +55,8 @@ const SignUp = () => {
                     name="password"
                     id="password"
                     placeholder="enter password here"
+                    onChange={e => setPassword(e.target.value)}
+                    value={password}
                   />
                 </FormGroup>
                 <div style={{ textAlign: "right" }}>
