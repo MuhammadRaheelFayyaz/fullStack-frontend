@@ -5,13 +5,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SignUp from "./components/signUp";
 import HomePage from "./components/home";
 import Signin from "./components/signin";
+import Header from "./components/header";
 function App() {
   return (
-    <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route exact path="/register" component={SignUp} />
-      <Route exact path="/signin" component={Signin} />
-    </Switch>
+    <>
+      <Header />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/register" component={SignUp} />
+        <Route exact path="/signin" component={Signin} />
+      </Switch>
+    </>
   );
 }
 

@@ -21,22 +21,24 @@ import {
 } from "reactstrap";
 import { mapStateToProps, mapDispatchToProps } from "../actions/user.action";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 const Signin = props => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [signIn, setSignIn] = useState(false);
   const submitHandler = async () => {
     let user = { name, password };
+    console.log("user :", user);
     try {
       await props.signIn(user);
       let token = await localStorage.getItem("token");
       if (!token) throw "Invalid Credential";
-      console.log("token :", token);
-      alert("Success");
+      setSignIn(true);
     } catch (error) {
       alert(error);
     }
   };
+  if (signIn) return <Redirect to="/"></Redirect>;
   return (
     <Container>
       <Row>

@@ -1,21 +1,27 @@
-const jwt = require("jsonwebtoken");
-export const userReducer = async (state = { name: "", id: "" }, action) => {
+export const userReducer = (
+  state = { name: "", user_id: "", session: false },
+  action
+) => {
   switch (action.type) {
     case "Register": {
-      let { token } = action.payload;
-      if (!token) return state;
-      await localStorage.setItem("token", token);
-      let decode = jwt.decode(token);
-      let user = { user_id: decode.user_id };
-      return { ...state, user };
+      return state;
+      break;
     }
     case "SignIn": {
-      let { token } = action.payload;
-      if (!token) return state;
-      await localStorage.setItem("token", token);
-      let decode = jwt.decode(token);
-      let user = { user_id: decode.user_id };
-      return { ...state, user };
+      return state;
+      break;
+    }
+    case "SetUser": {
+      let { name, user_id } = action.payload;
+      return { ...state, name, user_id, session: true };
+      break;
+    }
+    case "NotUser": {
+      const name = "",
+        user_id = "",
+        session = false;
+      return { ...state, name, user_id, session };
+      break;
     }
     default:
       return state;
