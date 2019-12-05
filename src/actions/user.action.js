@@ -5,11 +5,11 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   register: async user => {
-    console.log("user :", user);
     try {
       let res = await API.post(`/user/register`, user);
       if (res.data.status === "error") throw res.data.message;
-      dispatch({ type: "Register", payload: { token: res.data.token } });
+      await localStorage.setItem("token", res.data.token);
+      dispatch({ type: "SetUser", payload: res.data });
     } catch (error) {
       console.log("error :", error);
       dispatch({ type: "Register", payload: { token: null } });
@@ -18,11 +18,35 @@ export const mapDispatchToProps = dispatch => ({
   },
   signIn: async user => {
     try {
-      let res = await API.get(`/user/signin`, user);
-      dispatch({ type: "SignIn", payload: { token: res.data.token } });
+      let res = await API.get(`/user/signin/${user.name}/${user.password}`);
+      if (res.data.status === "error") throw res.data.message;
+      await localStorage.setItem("token", res.data.token);
+      dispatch({ type: "SetUser", payload: res.data });
     } catch (error) {
-      console.log("error :", error.error);
+      console.log("error :", error);
       dispatch({ type: "SignIn", payload: { token: null } });
     }
+  },
+  setUser: async () => {
+    try {
+      let token = await localStorage.getItem("token");
+      if (!token) throw "No token";
+      let res = await API.get("/user/authenticate", {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      });
+
+      if (res.data.status === "error") throw res.data.message;
+      dispatch({ type: "SetUser", payload: res.data });
+    } catch (error) {
+      console.log("error :", error);
+      dispatch({ type: "NotUser", payload: {} });
+    }
+  },
+  signOut: async () => {
+    console.log("Signout.......");
+    await localStorage.removeItem("token");
+    dispatch({ type: "NotUser", payload: {} });
   }
 });
