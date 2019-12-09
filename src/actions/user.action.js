@@ -51,7 +51,6 @@ export const mapDispatchToProps = dispatch => ({
   },
   getUsersList: async (key, token) => {
     try {
-      console.log("key :", key);
       const res = await API.get(`/user/get/${key}`, {
         headers: {
           Authorization: "Bearer " + token
