@@ -10,8 +10,7 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
-  NavbarText
+  DropdownItem
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -25,7 +24,7 @@ const Header = props => {
     props.setUser();
   }
   console.log("props.user :", props);
-  let { name, user_id, session } = props.user;
+  let { name, session } = props.user;
   return (
     <>
       <Navbar color="light" light expand="md">
