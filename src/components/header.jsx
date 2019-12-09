@@ -45,13 +45,18 @@ const Header = props => {
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
-                Options
+                View User
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
+                <DropdownItem>
+                  <Link to={"/users/all"}>All Users</Link>
+                </DropdownItem>
+                <DropdownItem>
+                  <Link to={"/users/deleted"}>Blocked Users</Link>
+                </DropdownItem>
+                <DropdownItem>
+                  <Link to={"/users/undeleted"}>Un Blocked Users</Link>
+                </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
