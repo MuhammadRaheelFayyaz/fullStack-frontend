@@ -48,5 +48,27 @@ export const mapDispatchToProps = dispatch => ({
     console.log("Signout.......");
     await localStorage.removeItem("token");
     dispatch({ type: "NotUser", payload: {} });
+  },
+  getUsersList: async (key, token) => {
+    try {
+      console.log("key :", key);
+      const res = await API.get(`/user/get/${key}`, {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      });
+      if (res.data.status === "error") throw res.data.message;
+      dispatch({
+        type: "userList",
+        payload: res.data
+      });
+    } catch (error) {
+      console.log("error :", error);
+      dispatch({
+        type: "userList",
+        payload: []
+      });
+      alert(error);
+    }
   }
 });

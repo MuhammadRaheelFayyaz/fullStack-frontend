@@ -28,7 +28,6 @@ const Signin = props => {
   const [signIn, setSignIn] = useState(false);
   const submitHandler = async () => {
     let user = { name, password };
-    console.log("user :", user);
     try {
       await props.signIn(user);
       let token = await localStorage.getItem("token");
@@ -38,7 +37,7 @@ const Signin = props => {
       alert(error);
     }
   };
-  if (signIn) return <Redirect to="/"></Redirect>;
+  if (signIn) return <Redirect to="/" />;
   return (
     <Container>
       <Row>

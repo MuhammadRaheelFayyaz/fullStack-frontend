@@ -6,6 +6,7 @@ import SignUp from "./components/signUp";
 import HomePage from "./components/home";
 import Signin from "./components/signin";
 import Header from "./components/header";
+import Users from "./components/user";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/register" component={SignUp} />
         <Route exact path="/signin" component={Signin} />
+        <Route exact path="/users/:key" component={Users} />
       </Switch>
     </>
   );
