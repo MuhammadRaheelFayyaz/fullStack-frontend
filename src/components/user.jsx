@@ -7,8 +7,8 @@ const Users = props => {
   const getData = async key => {
     props.getUsersList(key, await localStorage.getItem("token"));
   };
-  const userList = useSelector(state => {
-    return state.userReducer.userList;
+  const { userList } = useSelector(state => {
+    return state.userReducer;
   });
 
   useEffect(() => {
